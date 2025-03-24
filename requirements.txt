@@ -1,11 +1,5 @@
 pandas
 numpy
 streamlit
-zipfile
-zipfile
-pathlib
-shutil
-docx
-docxtpl
 random
 openpyxl
