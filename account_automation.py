@@ -13,17 +13,13 @@ import streamlit as st
 # from exif import Image as Image2
 
 
-import os
-import zipfile
-from zipfile import ZipFile, ZIP_DEFLATED
-import pathlib
-import shutil
-import docx
-import docxtpl
-from docx import Document
-from docx.shared import Inches
-from docx.enum.section import WD_ORIENT
-from docx.shared import Cm, Inches
+#import os
+#import zipfile
+#from zipfile import ZipFile, ZIP_DEFLATED
+#import pathlib
+#import shutil
+#import docx
+#import docxtpl
 import random
 from random import randint
 from streamlit import session_state
