@@ -205,8 +205,14 @@ if pas_master_file is not None and data_file is not None and booked_history_file
     worksheet = workbook.active
     for i, row in df_master_data.iterrows():
         worksheet.append(list(row))
-
     workbook.save(master_record_file)
+    
+    df_master_data_2 = pd.read_excel(master_record_file)
+    df_master_data_2.to_excel("Riya_Master_Record.xlsx")
+    st.write(df_master_data_2)
+    
+    
+    
     df_final["Passenger Name"] = df_final["Passenger Name"].fillna("Passenger Name Missing")
     for i, row in df_final.iterrows():
         if row[5] != "No Input" and row[7] == "Passenger Name Missing":
