@@ -14,8 +14,8 @@ import streamlit as st
 
 
 #import os
-#import zipfile
-#from zipfile import ZipFile, ZIP_DEFLATED
+import zipfile
+from zipfile import ZipFile, ZIP_DEFLATED
 #import pathlib
 #import shutil
 #import docx
@@ -54,33 +54,7 @@ if "row_no" not in state:
     
 
 
-if state["page_first_loaded"] == True:
-    
-    try:
-        shutil.rmtree("images_comp_audit")
-    except:
-        pass
-    
-    try:
-        os.mkdir("images_comp_audit")
-    except:
-        pass
-    
-    state["page_first_loaded"] = False
-    
 
-
-def createfile():
-    document = Document()
-    section = document.sections[0]
-    section.orientation = WD_ORIENT.LANDSCAPE
-    new_width, new_height = section.page_height, section.page_width
-    section.page_width = new_width
-    section.page_height = new_height
-    section.left_margin = Cm(1)
-    section.right_margin = Cm(1)
-    document.save("test.docx")
-    
 
 
     
@@ -338,6 +312,7 @@ if pas_master_file is not None and data_file is not None and booked_history_file
     df_dom_final["Payable Amount"] = "=M"+df_dom_final["Temp"] + "+W"+df_dom_final["Temp"] 
     df_dom_final.drop("Temp",axis=1 ,inplace=True)
     df_dom_final.to_excel("domestic_final.xlsx")
+    
     df_customer_intl = df_customer_1[(df_customer_1["Airport Id"] == "International") & (df_customer_1["Product Type"] =="Ticket Issued")]
     df_remaining = pd.concat([df_remaining,df_customer_intl]).drop_duplicates(keep=False)
     df_customer_intl["lead passenger"] = df_customer_intl["Passenger Name"].str.split(",")
@@ -440,16 +415,34 @@ if pas_master_file is not None and data_file is not None and booked_history_file
     
     df_seat_selection_final.to_excel("seat_final.xlsx")
     
+    final_output_file_list = ["output_2.xlsx", "All_Tickets.xlsx", "domestic_final.xlsx", "international_final.xlsx", "All_Tickets_final.xlsx", "cancellation_final.xlsx", 
+                              "rescheduling_final.xlsx", "insurance_final.xlsx",  "seat_final.xlsx", "Riya_Master_Record.xlsx"]
     
-    try:
-        with open("output_2.xlsx", "rb") as template_file:
-            template_byte = template_file.read()
-            btn_1 = st.download_button(
-                    label="Download Output File",
-                    data=template_byte,
-                    file_name="output_2.xlsx",
-                    mime='application/octet-stream'
-                    )
-    except:
-        pass
+    
+    zip_path = "final_output.zip"
+    
+    with ZipFile(zip_path, 'w', ZIP_DEFLATED) as zip:
+        for file in final_output_file_list:
+            zip.write(file, arcname=file)
+            
+            
+    with open("final_output.zip", "rb") as fp:
+        btn = st.download_button(
+            label="Download ZIP",
+            data=fp,
+            file_name="final_output.zip",
+            mime="application/zip"
+        )
+    
+    # try:
+    #     with open("output_2.xlsx", "rb") as template_file:
+    #         template_byte = template_file.read()
+    #         btn_1 = st.download_button(
+    #                 label="Download Output File",
+    #                 data=template_byte,
+    #                 file_name="output_2.xlsx",
+    #                 mime='application/octet-stream'
+    #                 )
+    # except:
+    #     pass
     
