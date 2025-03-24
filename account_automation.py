@@ -9,10 +9,10 @@ Created on Mon Mar 24 11:16:49 2025
 import pandas as pd
 import numpy as np
 import streamlit as st
-from PIL import Image
+
 # from exif import Image as Image2
-from PIL.ExifTags import TAGS
-import PIL
+
+
 import os
 import zipfile
 from zipfile import ZipFile, ZIP_DEFLATED
