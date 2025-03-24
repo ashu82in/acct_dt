@@ -1,7 +1,6 @@
 pandas
 numpy
 streamlit
-PIL
 os
 zipfile
 zipfile
