@@ -1,7 +1,6 @@
 pandas
 numpy
 streamlit
-os
 zipfile
 zipfile
 pathlib
