@@ -1,0 +1,13 @@
+pandas
+numpy
+streamlit
+PIL
+os
+zipfile
+zipfile
+pathlib
+shutil
+docx
+docxtpl
+random
+openpyxl
